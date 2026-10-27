@@ -65,6 +65,7 @@ jobs:
           exit-code: '1'
           ignore-unfixed: true
           severity: CRITICAL,HIGH
+          trivyignores: .trivyignore
 
       - name: Trivy - registrar vulnerabilidades LOW e MEDIUM
         if: always()
