@@ -18,6 +18,14 @@ docker run -p 8000:8000 ghcr.io/joaomarcus12/hello-app:1.0
 curl http://localhost:8000/hello
 ```
 
+## Imagens publicadas no GHCR
+
+| Tag | Resposta do endpoint |
+|---|---|
+| `ghcr.io/joaomarcus12/hello-app:1.0` | `"Hello World"` |
+| `ghcr.io/joaomarcus12/hello-app:2.0` | `"Hello World 2"` |
+| `ghcr.io/joaomarcus12/hello-app:latest` | `"Hello World 2"` |
+
 ## Workflows
 
 ### `docker.yml` — Build e publicação
@@ -43,6 +51,15 @@ Dispara em todo **Pull Request para `main`**. A publicação da imagem só ocorr
 | **Trivy** | Varredura de imagem e dependências | Bloqueia para vulnerabilidades CRITICAL e HIGH com correção disponível; LOW e MEDIUM são registradas em relatório sem bloquear |
 | **Syft** | Geração de SBOM | Gera e publica o arquivo `sbom.spdx.json` como artifact da execução |
 
+## SBOM (Software Bill of Materials)
+
+O SBOM da imagem Docker é gerado automaticamente pelo Syft a cada Pull Request e publicado como artifact do GitHub Actions.
+
+Para acessar o SBOM mais recente:
+1. Acesse a aba [Actions](https://github.com/JoaoMarcus12/hello-app/actions)
+2. Clique na execução mais recente do workflow **Verificações de Segurança**
+3. Baixe o artifact **sbom.spdx.json** na seção Artifacts
+
 ## Secrets necessários
 
 | Secret | Descrição |
@@ -52,8 +69,8 @@ Dispara em todo **Pull Request para `main`**. A publicação da imagem só ocorr
 
 ## Proteção de branch
 
-A branch `main` deve ter os seguintes checks obrigatórios configurados em **Settings → Branches → Branch protection rules**:
+A branch `main` tem os seguintes checks obrigatórios configurados via ruleset:
 
-- `Gitleaks - Secret Detection`
-- `SonarCloud - SAST`
-- `Trivy - Vulnerability Scan`
+- `Gitleaks - Detecção de Segredos`
+- `SonarCloud - Análise Estática (SAST)`
+- `Trivy - Varredura de Vulnerabilidades`
