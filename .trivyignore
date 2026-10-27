@@ -1,0 +1,13 @@
+# CVEs em dependências transitivas de pacotes de terceiros fora do nosso controle direto.
+# Registradas aqui enquanto aguardamos correção upstream.
+
+# msgpack vendorizado pelo opentelemetry
+CVE-2026-114613
+GHSA-6v7p-g79w-8964
+
+# setuptools da imagem base python:3.11-slim
+CVE-2025-47273
+
+# urllib3 transitivo do opentelemetry
+CVE-2026-97687
+CVE-2026-97689
